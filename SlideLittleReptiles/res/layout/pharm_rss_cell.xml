@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listProdcellLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/customtextpharma" >
+    
+    
+     
+    <TextView
+        android:id="@+id/titrereptiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="false"
+        android:maxLines="1"
+        android:text="TextView"
+        android:textColor="#ffA500"
+        android:textSize="18dp" />
+    
+    <ImageView
+        android:id="@+id/imagereptiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/titrereptiles"
+        android:adjustViewBounds="true"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:scaleType="centerCrop" />
+    
+    <TextView
+        android:id="@+id/excerptreptiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/imagereptiles"
+        android:layout_toRightOf="@+id/imagereptiles"
+        android:maxLines="4"
+        android:text="TextView"
+        android:textSize="12dp" />
+   
+</RelativeLayout>
