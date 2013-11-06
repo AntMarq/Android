@@ -139,7 +139,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 			Message msg = new Message ();
 			if (result != null)
 			{
-			//	Log.v(tag, "result = " + result);
+			
 				try 
 				{
 					XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -150,9 +150,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 										
 					 int eventType = xpp.getEventType();
 					 ObjActuRss newObject = null;
-					 
-					//ArrayList<RssFeedObject> objArrayRSS = null;
-	
+
 				    while (eventType != XmlPullParser.END_DOCUMENT)
 				    {
 				    	
@@ -160,7 +158,6 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 			            switch (eventType)
 			            {
 			                case XmlPullParser.START_DOCUMENT:
-			          //      	objArrayRSS = new ArrayList<RssFeedObject>();
 			                    break;
 			                case XmlPullParser.START_TAG:
 			                    name = xpp.getName();		                    
@@ -177,20 +174,20 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 				                    		
 			                    		newObject.title = xpp.nextText(); 
 			                    					         
-			                    	Log.v(tag , "resultat title" + newObject.title );
+			                  //  	Log.v(tag , "resultat title" + newObject.title );
 					                       // xpp.nextTag();
         
 				                    }
 				                    else if (name.equals("description"))
 				                    {				                        	
 				                		newObject.description = xpp.nextText(); 
-				              //  		Log.v(tag , "resultat title" + newObject.description );
+				            
 				                    }
 				                    else if (name.equals("pubDate"))
 				                    {		
 				                    	newObject.pubDate=xpp.nextText();
 				                		
-				 //               		Log.v(tag , "resultat title" + newObject.pubDate );
+			
 				                    }
 
 			                        else if (name.equals("link"))
@@ -203,7 +200,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 			                        {
 			                        	newObject.setUrlimage(xpp.getAttributeValue(null, "url")); 
 			                        	
-			     //                   	Log.v(tag , "resultat enclosure" + newObject.getUrlimage());
+			 
 			                        }   
 			                    }
 			                    break;

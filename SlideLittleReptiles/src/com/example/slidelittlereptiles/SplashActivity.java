@@ -24,30 +24,30 @@ public class SplashActivity extends Activity
     {
 		 @Override
 		 public void handleMessage(Message msg)
-		        {
-		 if (msg.what == STOPSPLASH)
-		            {
-		 final Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+		 {
+			 	 if (msg.what == STOPSPLASH)
+		         {
+			 		 	final Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 		                startActivity(intent);
 		                finish();
-		            }
+		         }
 
-		 super.handleMessage(msg);
-		        }
-		    };
+			 	 super.handleMessage(msg);
+		 }
+    };
 	
 		
     
 		 @Override
 		 protected void onCreate(Bundle savedInstanceState)
-		    {
+		 {
 				 super.onCreate(savedInstanceState);
 				 setContentView(R.layout.splash);
 				
 				 final Message msg = new Message();
 				        msg.what = STOPSPLASH;
 				        splashHandler.sendMessageDelayed(msg, SPLASHTIME);
-		    }
-    	}
+		 }
+}
 	
 

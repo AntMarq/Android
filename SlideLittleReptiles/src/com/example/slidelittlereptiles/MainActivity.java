@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 The Android Open Source Project
+Ï * Copyright 2013 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,9 @@
 
 package com.example.slidelittlereptiles;
 
-import com.example.slidelittlereptiles.controller.ActuListFragment;
-import com.example.slidelittlereptiles.controller.PharmListFragment;
-import com.example.slidelittlereptiles.controller.ShowMapFragment;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -39,47 +34,28 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.slidelittlereptiles.controller.ActuListFragment;
+import com.example.slidelittlereptiles.controller.PharmListFragment;
+import com.example.slidelittlereptiles.controller.ShowMapFragment;
 
 
-/**
- * This example illustrates a common usage of the DrawerLayout widget
- * in the Android support library.
- * <p/>
- * <p>When a navigation (left) drawer is present, the host activity should detect presses of
- * the action bar's Up affordance as a signal to open and close the navigation drawer. The
- * ActionBarDrawerToggle facilitates this behavior.
- * Items within the drawer should fall into one of two categories:</p>
- * <p/>
- * <ul>
- * <li><strong>View switches</strong>. A view switch follows the same basic policies as
- * list or tab navigation in that a view switch does not create navigation history.
- * This pattern should only be used at the root activity of a task, leaving some form
- * of Up navigation active for activities further down the navigation hierarchy.</li>
- * <li><strong>Selective Up</strong>. The drawer allows the user to choose an alternate
- * parent for Up navigation. This allows a user to jump across an app's navigation
- * hierarchy at will. The application should treat this as it treats Up navigation from
- * a different task, replacing the current task stack using TaskStackBuilder or similar.
- * This is the only form of navigation drawer that should be used outside of the root
- * activity of a task.</li>
- * </ul>
- * <p/>
- * <p>Right side drawers should be used for actions, not navigation. This follows the pattern
- * established by the Action Bar that navigation should be to the left and actions to the right.
- * An action should be an operation performed on the current contents of the window,
- * for example enabling or disabling a data overlay on top of the current content.</p>
- */
-public class MainActivity extends ActionBarActivity {
-	private static final String TAG = "MainActivity";
+
+
+public class MainActivity extends ActionBarActivity 
+{
+	private static final String tag = "MainActivity";
 	private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    String tag = "MainActivity";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] menuTitles;
-    private ActuListFragment actuListFragment;
-    private PharmListFragment pharmListFragment ;
-    private ShowMapFragment showMapFragment ;
+    private String tagMap = "Map" ;
+    private String tagActu = "Actu" ;
+    private String tagPharma = "Pharma" ;
+    private ActuListFragment actuListFragment = new ActuListFragment();
+    private PharmListFragment pharmListFragment = new PharmListFragment() ;
+    private ShowMapFragment showMapFragment = new ShowMapFragment();
 
 
     @Override
@@ -96,8 +72,7 @@ public class MainActivity extends ActionBarActivity {
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, menuTitles));
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item, menuTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -113,24 +88,25 @@ public class MainActivity extends ActionBarActivity {
                 R.string.drawer_open,  /* "open drawer" description for accessibility */
                 R.string.drawer_close  /* "close drawer" description for accessibility */
                 ) {
-            public void onDrawerClosed(View view) {
+            public void onDrawerClosed(View view) 
+            {
                 getSupportActionBar().setTitle(mTitle);
-         //      invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
-            public void onDrawerOpened(View drawerView) {
+            public void onDrawerOpened(View drawerView) 
+            {
             	getSupportActionBar().setTitle(mDrawerTitle);
-           //  invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                supportInvalidateOptionsMenu();// creates call to onPrepareOptionsMenu()
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+//Select default item
         if (savedInstanceState == null) 
         {
-        	
             selectItem(0);
-        }
-       
+        }  
     }
 
     @Override
@@ -145,154 +121,91 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) 
     {
-        // If the nav drawer is open, hide action items related to the content view
-        
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Only handle with DrawerToggle if the drawer indicator is enabled.
-        if (mDrawerToggle.isDrawerIndicatorEnabled() &&
-                mDrawerToggle.onOptionsItemSelected(item))        
+        if (mDrawerToggle.isDrawerIndicatorEnabled() && mDrawerToggle.onOptionsItemSelected(item))        
         {
-        	Log.v(tag, "Drawer open");
-        //	onBackPressed();
-        	
             return true;
         }
 		 return super.onOptionsItemSelected(item);
-        
     }
 
     /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    private class DrawerItemClickListener implements ListView.OnItemClickListener 
+    {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
+        {
             selectItem(position);
         }
     }
     
-  
     private void selectItem(int position) 
     {
     	FragmentManager manager = getSupportFragmentManager();
     	FragmentTransaction ft = manager.beginTransaction();
-    	Log.v(tag, "selectItem !");
-    	  // update the main content by replacing fragments
-    	 
 
         switch (position) 
-        {
-        
+        {        
         case 0: 
-        	String tagActu = "Actu" ;
+        	   
+//Display ActuListFragment and hide other fragment 
         	
-        	if(actuListFragment == null)
+        	if(manager.findFragmentByTag(tagActu) == null )
         	{
-        		actuListFragment = new ActuListFragment();     		
-                ft.add(R.id.content_frame,actuListFragment,tagActu);
-               
-        	}
+                ft.add(R.id.content_frame,actuListFragment,tagActu);        
+        	}	
         	else
-        	{
-        		if(pharmListFragment != null && showMapFragment != null)
-        		{
-        			Log.v(tag, "pharmListFragment not null in first fragment");
-        			ft.hide(pharmListFragment).hide(showMapFragment).show(actuListFragment) ;           
-        		}
-        		
-        		if(pharmListFragment != null && showMapFragment == null)
-        		{
-        			Log.v(tag, "pharmListFragment not null but map is null");
-        			ft.hide(pharmListFragment).show(actuListFragment) ;                    
-        		}        		
-        		if(pharmListFragment == null && showMapFragment != null)
-        		{
-        			Log.v(tag, "pharmListFragment not null but pharmListFragment is null");
-        			ft.hide(showMapFragment).show(actuListFragment) ;                  
-        		}     
+        	{       	
+        		ft.hide(pharmListFragment).hide(showMapFragment).show(actuListFragment) ;   
         		actuListFragment.setHasOptionsMenu(true);
         	}
         	ft.commit();
-
             break;
             
         case 1:
-        	String tagPharma = "Pharma" ;
-        	if(pharmListFragment == null)
-        	{
-	        	pharmListFragment = new PharmListFragment(); 	        	
-	        	ft .add(R.id.content_frame,pharmListFragment,tagPharma); 
+  
+//Display PharmaListfragment and hide other fragment
+        	
+        	if(manager.findFragmentByTag(tagPharma) == null )
+        	{	        	
+	        	ft .add(R.id.content_frame,pharmListFragment,tagPharma).hide(actuListFragment).show(pharmListFragment); 	        	
 	        	actuListFragment.setHasOptionsMenu(false);
+	        	showMapFragment.setHasOptionsMenu(false);
         	}
         	else
         	{
-        		if(actuListFragment != null && showMapFragment != null)
-        		{
-        			Log.v(tag, "pharmListFragment not null in first fragment");
-        			ft.hide(actuListFragment).hide(showMapFragment).show(pharmListFragment) ;
-                    
-        		}
-        		
-        		if(actuListFragment != null && showMapFragment == null)
-        		{
-        			Log.v(tag, "pharmListFragment not null but map is null");
-        			ft.hide(actuListFragment).show(pharmListFragment) ;
-                    
-        		}
-        		
-        		if(actuListFragment == null && showMapFragment != null)
-        		{
-        			Log.v(tag, "pharmListFragment not null but pharmListFragment is null");
-        			ft.hide(showMapFragment).show(pharmListFragment) ;
-                    
-        		}
+        		ft.hide(actuListFragment).hide(showMapFragment).show(pharmListFragment) ;   
         		pharmListFragment.setHasOptionsMenu(true);
         	}
         	ft.commit();  	
             break;
             
         case 2:
-        	String tagMap = "Map" ;
-        	if(showMapFragment == null)
-        	{
-	            showMapFragment = new ShowMapFragment();
-	           
-	            ft.add(R.id.content_frame,showMapFragment,tagMap)  ;      
+        	
+//Display ShowMapfragment and hide other fragment 
+        	
+        	if(manager.findFragmentByTag(tagMap) == null )
+        	{          
+	            ft.add(R.id.content_frame,showMapFragment,tagMap).hide(actuListFragment).hide(pharmListFragment).show(showMapFragment)  ;      
 	            actuListFragment.setHasOptionsMenu(false);
-	           
+	            pharmListFragment.setHasOptionsMenu(false);	           
         	}
+
         	else
         	{
-        		if(actuListFragment != null && pharmListFragment != null)
-        		{
-        			Log.v(tag, "pharmListFragment not null in first fragment");
-        			ft.hide(actuListFragment).hide(pharmListFragment).show(showMapFragment)  ;
-                    
-        		}
-        		
-        		if(actuListFragment != null && pharmListFragment == null)
-        		{
-        			Log.v(tag, "pharmListFragment not null but map is null");
-        			ft.hide(actuListFragment).show(showMapFragment) ;
-                    
-        		}
-        		
-        		if(actuListFragment == null && pharmListFragment != null)
-        		{
-        			Log.v(tag, "pharmListFragment not null but pharmListFragment is null");
-        			ft.hide(pharmListFragment).show(showMapFragment) ;
-                    
-        		}
-        	}
+        		ft.hide(actuListFragment).hide(pharmListFragment).show(showMapFragment);
+        		showMapFragment.setHasOptionsMenu(true);
+        	}   
         	
         	ft.commit();
             break;
         }
-
-      
-
+        
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
         setTitle(menuTitles[position]);

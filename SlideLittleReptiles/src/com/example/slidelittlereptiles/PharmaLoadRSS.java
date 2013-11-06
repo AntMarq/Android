@@ -65,11 +65,9 @@ public class PharmaLoadRSS extends ArrayList<ObjPharmRss>
 	public void refreshOnline ()
 	{
 		Log.v(tag, "refreshOnline" );
-		if(PharmaLoadRSS.this.size() > 0)
-		{
-			Log.v(tag, "liste size before clear" + PharmaLoadRSS.this.size());
+		if(PharmaLoadRSS.this.size() >= 0)
+		{			
 			PharmaLoadRSS.this.clear();
-			Log.v(tag, "liste size after clear" + PharmaLoadRSS.this.size());
 		}
 		loading = new GetRss ();
 		loading .execute ();
@@ -82,8 +80,6 @@ public class PharmaLoadRSS extends ArrayList<ObjPharmRss>
 		@Override
 		protected String doInBackground(String... params) 
 		{
-		//	Log.v(tag, "doInBackground ");
-
 			try
 			{			
 				

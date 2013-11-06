@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ListFragment;
+import android.support.v4.view.MenuItemCompat;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,11 +25,11 @@ import com.example.slidelittlereptiles.R.layout;
 import com.example.slidelittlereptiles.R.menu;
 import com.example.slidelittlereptiles.model.ObjPharmRss;
 import com.example.slidelittlereptiles.view.PharmRssAdapter;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.markupartist.android.widget.PullToRefreshListView;
+import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
-public class PharmListFragment extends ListFragment  implements OnRefreshListener<ListView>
+
+public class PharmListFragment extends ListFragment 
 {
 	
 	 	GlobalVar application;
@@ -35,14 +37,14 @@ public class PharmListFragment extends ListFragment  implements OnRefreshListene
 	   PharmaLoadRSS loadRSS;
 	    private Handler		listeHandler;
 		public String tag = "RSSfragment";
-		PullToRefreshListView view;
 		 private MenuItem mRefresh = null;
+		 CharSequence lastUpdated;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) 
 	{
 		
-		 view = (PullToRefreshListView) inflater.inflate (getResources ().getLayout (R.layout.pharm_rss_layout), container, false);
+		final PullToRefreshListView view = (com.markupartist.android.widget.PullToRefreshListView) inflater.inflate (getResources ().getLayout (R.layout.pharm_rss_layout), container, false);
 		if(loadRSS == null)
 		{
 			getActivity().setProgressBarIndeterminateVisibility(true);
@@ -58,7 +60,7 @@ public class PharmListFragment extends ListFragment  implements OnRefreshListene
 				if (done == 0)
 				{
 					getActivity().setProgressBarIndeterminateVisibility(false);
-					mRefresh.setActionView(null);
+					MenuItemCompat.setActionView(mRefresh, null);
 					Toast.makeText (getActivity ().getApplicationContext (), "Une erreur est survenue",
 							Toast.LENGTH_SHORT).show ();
 				}
@@ -66,7 +68,7 @@ public class PharmListFragment extends ListFragment  implements OnRefreshListene
 				{
 					if(mRefresh != null)
 					{
-						mRefresh.setActionView(null);
+						MenuItemCompat.setActionView(mRefresh, null);
 					}		
 					getActivity().setProgressBarIndeterminateVisibility(false);
 					adapter.notifyDataSetChanged ();
@@ -80,9 +82,22 @@ public class PharmListFragment extends ListFragment  implements OnRefreshListene
 			loadRSS.setHandler (listeHandler);	
 			loadRSS.refreshOnline();
 	        adapter = new PharmRssAdapter(getActivity ().getBaseContext (), loadRSS);
-	        setListAdapter (adapter);
-	        view.setOnRefreshListener(PharmListFragment.this);
 	        
+	        view.setOnRefreshListener(new OnRefreshListener() 
+	        {
+		        @Override
+		        public void onRefresh() 
+		        {
+		        	
+		        	String dateString = DateUtils.formatDateTime(application.getApplicationContext(),System.currentTimeMillis(), DateUtils.FORMAT_SHOW_DATE);
+		            String timeString = DateUtils.formatDateTime(application.getApplicationContext(),System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME);
+		        	lastUpdated = "Mise ˆ jour le " + dateString + " ˆ " + timeString ;
+		        	loadRSS.refreshOnline();
+		        	
+					view.setLastUpdated(lastUpdated);
+		        }
+		    });	
+	        setListAdapter (adapter);
 
         return view;
     }
@@ -132,14 +147,6 @@ public class PharmListFragment extends ListFragment  implements OnRefreshListene
 			startActivity (intent);
 		}
 	}
-
-	@Override
-	public void onRefresh(PullToRefreshBase<ListView> refreshView)
-	{
-		
-		loadRSS.refreshOnline();
-		
-	}
 	
 
 	 @Override
@@ -155,7 +162,7 @@ public class PharmListFragment extends ListFragment  implements OnRefreshListene
 			switch (item.getItemId()) {
 			    case R.id.refresh:
 			    	mRefresh = item;
-					mRefresh.setActionView(R.layout.progressbar);
+			    	MenuItemCompat.setActionView(mRefresh, R.layout.progressbar);
 			    	loadRSS.refreshOnline();
 			    break;        
 			}

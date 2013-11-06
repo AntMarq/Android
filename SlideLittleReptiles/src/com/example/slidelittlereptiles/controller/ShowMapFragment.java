@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
@@ -26,9 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.slidelittlereptiles.R;
-import com.example.slidelittlereptiles.R.id;
-import com.example.slidelittlereptiles.R.layout;
-import com.example.slidelittlereptiles.R.menu;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -45,9 +43,6 @@ public class ShowMapFragment extends Fragment
 	 String tag = "ShowMapFrag" ;
 	 MarkerOptions markerOptions;
 	
-	 
-
-		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{		
@@ -99,37 +94,34 @@ public class ShowMapFragment extends Fragment
 	 public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) 
 	 {
 		 
-	        
 	     inflater.inflate(R.menu.map_menu, menu);
-	   
-	   //  SearchManager searchManager =(SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-	      final SearchView searchView =(SearchView) menu.findItem(R.id.action_search).getActionView();
-	      searchView.setQueryHint("Search The Map");
-	      searchView.setOnQueryTextListener(new OnQueryTextListener() 
-	      {
+	     MenuItem searchItem = menu.findItem(R.id.action_search);
+	     final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);  
+	    	
+	    	 searchView.setQueryHint("Search The Map");
+		      searchView.setOnQueryTextListener(new OnQueryTextListener() 
+		      {
 
-	          @Override
-	          public boolean onQueryTextSubmit(String query) 
-	          {	             
-				Log.v(tag, "query=" + query);
-				new GeocoderTask().execute(query);
-				searchView.clearFocus();
-	              return false;
-	          }
+		          @Override
+		          public boolean onQueryTextSubmit(String query) 
+		          {	             
+					Log.v(tag, "query=" + query);
+					new GeocoderTask().execute(query);
+					searchView.clearFocus();
+		            return false;
+		          }
 
-			@Override
-			public boolean onQueryTextChange(String arg0) 
-			{
-				// TODO Auto-generated method stub
-				return false;
-			}
-	      });
-	    //  searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-	    
+				@Override
+				public boolean onQueryTextChange(String arg0) 
+				{
+					// TODO Auto-generated method stub
+					return false;
+				}
+		      });
+		      
 	      super.onCreateOptionsMenu(menu, inflater);
    
 	 }
-	 
 	
 	 
 	 @Override
@@ -138,8 +130,7 @@ public class ShowMapFragment extends Fragment
 			switch (item.getItemId()) 
 			{
 			    case R.id.action_search:
-			    	
-			    	
+
 			    break;        
 			}
 			return false;
@@ -157,19 +148,25 @@ public class ShowMapFragment extends Fragment
 	            try {
 	                // Getting a maximum of 3 Address that matches the input text
 	                addresses = geocoder.getFromLocationName(locationName[0], 3);
-	            } catch (IOException e) {
+	            } 
+	            catch (IOException e) 
+	            {
+	            	// Toast.makeText(getActivity().getBaseContext(), "Service not available", Toast.LENGTH_SHORT).show();
 	                e.printStackTrace();
+	               
 	            }
+	            Log.v(tag, "doInBackground" + addresses);
 	            return addresses;
-	        }
+	        }	
 	 
 	        @Override
-	        protected void onPostExecute(List<Address> addresses) {
-	 
+	        protected void onPostExecute(List<Address> addresses) 
+	        {
+	        	 Log.v(tag, "addresses" + addresses);
 	            if(addresses==null || addresses.size()==0){
 	                Toast.makeText(getActivity().getBaseContext(), "No Location found", Toast.LENGTH_SHORT).show();
 	            }
-	 
+	            Log.v(tag, "addresses" + addresses);
 	            // Clears all the existing markers on the map
 	            map.clear();
 	 
@@ -179,7 +176,7 @@ public class ShowMapFragment extends Fragment
 	 
 	                Address address = (Address) addresses.get(i);
 	 
-	                // Creating an instance of GeoPoint, to display in Google Map
+	                // New GeoPoint, to display in Google Map
 	                LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
 	 
 	                String addressText = String.format("%s, %s",

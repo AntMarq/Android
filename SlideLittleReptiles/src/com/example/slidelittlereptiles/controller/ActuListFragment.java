@@ -1,25 +1,16 @@
 package com.example.slidelittlereptiles.controller;
 
-import com.example.slidelittlereptiles.ActuLoadRss;
-import com.example.slidelittlereptiles.GlobalVar;
-import com.example.slidelittlereptiles.R;
-import com.example.slidelittlereptiles.R.id;
-import com.example.slidelittlereptiles.R.layout;
-import com.example.slidelittlereptiles.R.menu;
-import com.example.slidelittlereptiles.model.ObjActuRss;
-import com.example.slidelittlereptiles.view.ActuRssAdapter;
-import com.markupartist.android.widget.PullToRefreshListView;
-import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
+import java.util.Date;
 
+import android.app.Application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.app.ListFragment;
+import android.support.v4.view.MenuItemCompat;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.slidelittlereptiles.ActuLoadRss;
+import com.example.slidelittlereptiles.GlobalVar;
+import com.example.slidelittlereptiles.R;
+import com.example.slidelittlereptiles.model.ObjActuRss;
+import com.example.slidelittlereptiles.view.ActuRssAdapter;
+import com.markupartist.android.widget.PullToRefreshListView;
+import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
 
 public class ActuListFragment extends ListFragment 
@@ -41,7 +40,7 @@ public class ActuListFragment extends ListFragment
 	public String tag = "RSSfragment";
 	 int mCurCheckPosition = 0;
 	 private MenuItem mRefresh = null;
-
+	 CharSequence lastUpdated;
 	 
 
 	 @Override
@@ -51,8 +50,10 @@ public class ActuListFragment extends ListFragment
 	 super.onCreate(savedInstanceState);
 	 Log.v(tag, "onCreate" + savedInstanceState);
 	 
-	 setHasOptionsMenu(true);	 
-	 getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+	 setHasOptionsMenu(true);
+	 
+	 
+	 
 	
 	 if(savedInstanceState != null) 
 	 {
@@ -67,6 +68,9 @@ public class ActuListFragment extends ListFragment
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 			super.onActivityCreated(savedInstanceState);
+			
+		//	getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+			 
 			Log.v(tag, "onActivityCreated");
 	}
 	
@@ -90,14 +94,14 @@ public class ActuListFragment extends ListFragment
 					int done = msg.arg1;
 					if (done == 0)
 					{
-						mRefresh.setActionView(null);
+						MenuItemCompat.setActionView(mRefresh, null);
 						Toast.makeText (getActivity ().getApplicationContext (), "Une erreur est survenue",Toast.LENGTH_SHORT).show ();
 					}
 					else
 					{
 						if(mRefresh != null)
 						{
-							mRefresh.setActionView(null);
+							MenuItemCompat.setActionView(mRefresh, null);
 						}								
 						adapter.notifyDataSetChanged ();
 						view.onRefreshComplete();
@@ -111,13 +115,19 @@ public class ActuListFragment extends ListFragment
 				loadRSS.refreshOnline();
 		        adapter = new ActuRssAdapter(getActivity ().getBaseContext (), loadRSS);
 		        setListAdapter (adapter);
+		      
 		        view.setOnRefreshListener(new OnRefreshListener() 
 		        {
 			        @Override
 			        public void onRefresh() 
 			        {
+			        	
+			        	String dateString = DateUtils.formatDateTime(application.getApplicationContext(),System.currentTimeMillis(), DateUtils.FORMAT_SHOW_DATE);
+			            String timeString = DateUtils.formatDateTime(application.getApplicationContext(),System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME);
+			        	lastUpdated = "Mise ˆ jour le " + dateString + " ˆ " + timeString ;
 			        	loadRSS.refreshOnline();
-			           
+			        	
+						view.setLastUpdated(lastUpdated);
 			        }
 			    });	
 		    return view;
@@ -179,7 +189,7 @@ public class ActuListFragment extends ListFragment
 		if (item.getItemId() == R.id.refresh)
 			{
 					mRefresh = item;
-					mRefresh.setActionView(R.layout.progressbar);
+					MenuItemCompat.setActionView(mRefresh, R.layout.progressbar);
 					
 				//    	getActivity().setProgressBarIndeterminateVisibility(true);
 				    	loadRSS.refreshOnline();
