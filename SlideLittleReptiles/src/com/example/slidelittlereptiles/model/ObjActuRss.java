@@ -35,7 +35,7 @@ public class ObjActuRss implements Comparable<Object>{
     }
 	
 	public Date ActuDate (String string)
-<<<<<<< HEAD
+
     {
             String pattern = "EEE, d MMM yyyy HH:mm:ss Z" ;
             
@@ -59,31 +59,8 @@ public class ObjActuRss implements Comparable<Object>{
             String newDateString = new SimpleDateFormat( newPattern).format( ActuDate (originalDate) ) ;
             return newDateString;
     }
-=======
-	{
-		String pattern = "EEE, d MMM yyyy HH:mm:ss Z" ;
-		
-		/* Parsing String -> Date */ 
-		try 
-		{ 
-		  Date dateActu = (new SimpleDateFormat( pattern, Locale.US  )).parse( string ) ;
-	//	  Log.v("ObjeActuRss", "dateformat" + dateActu );
-		  return dateActu;
-		} 
-		catch ( ParseException ex ) 
-		{ 
-		    System.err.println( ex.getMessage() ) ; 
-		    return null;
-		}		
-	}
+
 	
-	public String ActudateString (String originalDate)
-	{
-		String newPattern = "EEE d/MM/yyyy HH:mm:ss" ;
-		String newDateString = new SimpleDateFormat( newPattern).format( ActuDate (originalDate) ) ; 
-		return newDateString;
-	}
->>>>>>> 35f9c810b4d01fafc0bc2f725013ee4338e7dd58
 	
 	 @Override
 	 public int compareTo(Object another) 

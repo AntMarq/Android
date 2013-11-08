@@ -73,21 +73,14 @@ public class ActuRssAdapter extends BaseAdapter
 		}						
 		else 
 		{
-<<<<<<< HEAD
+
 			holder = (ViewHolder)convertView.getTag();						
 		}
-=======
-			holder = (ViewHolder)convertView.getTag();				
-		
-		}
-		
-		 // Do it on Application start	
-		
-		//holder.image.setImageBitmap(listRSS.get(position).getImage());
-		
-		
+
+	
+			
 		final ViewHolder finalHolder = holder;
->>>>>>> 35f9c810b4d01fafc0bc2f725013ee4338e7dd58
+
 
 		final ObjActuRss objActu = ((ObjActuRss)(listRSS.get(position)));
 		   holder.rssTitleView.setText  (Html.fromHtml((objActu.getTitle ().toString())));

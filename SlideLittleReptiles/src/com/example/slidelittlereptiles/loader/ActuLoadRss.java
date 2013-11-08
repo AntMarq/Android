@@ -183,11 +183,9 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 				                    else if (name.equals("pubDate"))
 				                    {		
 				                    	newObject.pubDate = newObject.ActudateString(xpp.nextText());
-<<<<<<< HEAD:SlideLittleReptiles/src/com/example/slidelittlereptiles/loader/ActuLoadRss.java
+
 				                		
-=======
->>>>>>> 35f9c810b4d01fafc0bc2f725013ee4338e7dd58:SlideLittleReptiles/src/com/example/slidelittlereptiles/ActuLoadRss.java
-			
+
 				                    }
 
 			                        else if (name.equals("link"))

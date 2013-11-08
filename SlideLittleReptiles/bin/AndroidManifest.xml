@@ -39,12 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/> 
             </intent-filter>
         </activity>
-        <activity android:name="com.example.slidelittlereptiles.MainActivity" android:configChanges="orientation|screenSize"
-          
-              >
+        <activity android:name="com.example.slidelittlereptiles.MainActivity" android:configChanges="orientation|screenSize" >
            
         </activity>
-        <activity android:name=".controller.ActuRssDetail">
+        <activity android:name="com.example.slidelittlereptiles.controller.ActuRssDetail">
            
             
             

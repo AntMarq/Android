@@ -3,6 +3,7 @@ package com.example.slidelittlereptiles.view;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,18 +81,9 @@ public class PharmRssAdapter extends BaseAdapter
 			holder = (ViewHolder)convertView.getTag();				
 		
 		}
-<<<<<<< HEAD
-=======
-			
-			 // Do it on Application start	
-			
-			//holder.imagePharma.setImageBitmap(listRSS.get(position).getImageRept());
-			
-			
-			final ViewHolder finalHolder = holder;
-			Bitmap cachedImage = null;
 
->>>>>>> 35f9c810b4d01fafc0bc2f725013ee4338e7dd58
+
+
 			final ObjPharmRss objrept = ((ObjPharmRss)(listRSS.get(position)));
 			holder.rssTitleView.setText  (Html.fromHtml((objrept.getTitle ().toString())));
 			holder.description.setText (Html.fromHtml((objrept.getDescription().toString())));
