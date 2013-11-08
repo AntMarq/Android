@@ -1,9 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listProdcellLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/custom_text_actu"
-    android:minHeight="65dp">
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_text_actu" >
 
     <ImageView
         android:id="@+id/image"
