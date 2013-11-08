@@ -14,15 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.slidelittlereptiles.GlobalVar;
-import com.example.slidelittlereptiles.PharmaLoadRSS;
 import com.example.slidelittlereptiles.R;
-import com.example.slidelittlereptiles.R.id;
-import com.example.slidelittlereptiles.R.layout;
-import com.example.slidelittlereptiles.R.menu;
+import com.example.slidelittlereptiles.loader.PharmaLoadRSS;
 import com.example.slidelittlereptiles.model.ObjPharmRss;
 import com.example.slidelittlereptiles.view.PharmRssAdapter;
 import com.markupartist.android.widget.PullToRefreshListView;

@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 
 import com.example.slidelittlereptiles.controller.ActuListFragment;
 import com.example.slidelittlereptiles.controller.PharmListFragment;
+import com.example.slidelittlereptiles.loader.PharmaLoadRSS;
 import com.example.slidelittlereptiles.model.ObjActuRss;
 import com.example.slidelittlereptiles.model.ObjPharmRss;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,7 +26,8 @@ public class GlobalVar extends Application
 
 
 	@Override
-	  public void onCreate() {
+	  public void onCreate() 
+	{
 	        super.onCreate();
 
 	        // Create global configuration and initialize ImageLoader with this configuration

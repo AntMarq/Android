@@ -1,12 +1,22 @@
 <resources>
-     <string name="app_name">TpAndroid</string>
-    <string-array name="reptiles_array">
+    <string name="app_name">TpAndroid</string>
+    
+    <string-array name="actu_array">        
         <item>Météo</item>
         <item>Santé</item>
-        <item>Carte</item>
-       
-
+        <item>GoogleMap</item>
     </string-array>
+    
+     <string-array name="categ_array">
+        <item>Actualités</item>
+        <item>Cartographie</item>
+      </string-array> 
+      
+    <array name="arraydrawer">
+    <item>@array/actu_array</item>
+    <item>@array/categ_array</item>
+	</array>
+	
     <string name="refresh_rss">Refresh Flux Rss</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

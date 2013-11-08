@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 
 public class ObjActuRss implements Comparable<Object>{
@@ -36,29 +35,29 @@ public class ObjActuRss implements Comparable<Object>{
     }
 	
 	public Date ActuDate (String string)
-	{
-		String pattern = "EEE, d MMM yyyy HH:mm:ss Z" ;
-		
-		/* Parsing String -> Date */ 
-		try 
-		{ 
-		  Date dateActu = (new SimpleDateFormat( pattern, Locale.US  )).parse( pubDate ) ;
-	//	  Log.v("ObjeActuRss", "dateformat" + dateActu );
-		  return dateActu;
-		} 
-		catch ( ParseException ex ) 
-		{ 
-		    System.err.println( ex.getMessage() ) ; 
-		    return null;
-		}		
-	}
-	
-	public String ActudateString ()
-	{
-		String newPattern = "EEE d/MM/yyyy HH:mm:ss" ;
-		String newDateString = (new SimpleDateFormat( newPattern)).format( ActuDate (toString ()) ) ; 
-		return newDateString;
-	}
+    {
+            String pattern = "EEE, d MMM yyyy HH:mm:ss Z" ;
+            
+            /* Parsing String -> Date */
+            try
+            {
+             Date dateActu = (new SimpleDateFormat( pattern, Locale.US )).parse( string ) ;
+    //         Log.v("ObjeActuRss", "dateformat" + dateActu );
+             return dateActu;
+            }
+            catch ( ParseException ex )
+            {
+             System.err.println( ex.getMessage() ) ;
+             return null;
+            }                
+    }
+    
+    public String ActudateString (String originalDate)
+    {
+            String newPattern = "EEE d/MM/yyyy HH:mm:ss" ;
+            String newDateString = new SimpleDateFormat( newPattern).format( ActuDate (originalDate) ) ;
+            return newDateString;
+    }
 	
 	 @Override
 	 public int compareTo(Object another) 

@@ -1,4 +1,4 @@
-package com.example.slidelittlereptiles;
+package com.example.slidelittlereptiles.loader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,13 +16,15 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import com.example.slidelittlereptiles.model.ObjPharmRss;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.slidelittlereptiles.GlobalVar;
+import com.example.slidelittlereptiles.model.ObjPharmRss;
 
 
 
@@ -35,11 +37,11 @@ public class PharmaLoadRSS extends ArrayList<ObjPharmRss>
 	private static final long serialVersionUID = 1L;
 	private static final String ns = null;
 	private Handler				handler;
-	Context context;
-	ObjPharmRss objRss;
-	GetRss loading ;
-	//RssFeedObject newObj;
+	private Context context;
+	private GetRss loading ;
 	public String tag = "PharmaLoadRSS";
+	private GlobalVar application;
+
 	
 	
 	
@@ -64,13 +66,20 @@ public class PharmaLoadRSS extends ArrayList<ObjPharmRss>
 	
 	public void refreshOnline ()
 	{
-		Log.v(tag, "refreshOnline" );
-		if(PharmaLoadRSS.this.size() >= 0)
-		{			
-			PharmaLoadRSS.this.clear();
+	
+		 application = (GlobalVar)context.getApplicationContext ();		
+		if(application.isOnline(context))
+		{
+			this.clear();
+			
+			loading = new GetRss ();
+			loading .execute ();
 		}
-		loading = new GetRss ();
-		loading .execute ();
+		else
+		{
+			Toast.makeText (application.getBaseContext(), "RŽseau non disponible", 3).show ();
+		}
+		
 	}
 	
 	private class GetRss extends AsyncTask<String, Integer, String>

@@ -14,7 +14,7 @@ public class SplashActivity extends Activity
     /**
      * Default duration for the splash screen (milliseconds)
      */
-	private static final long SPLASHTIME = 1000;
+	private static final long SPLASHTIME = 3000;
 
     /**
      * Handler to close this activity and to start automatically {@link MainActivity}

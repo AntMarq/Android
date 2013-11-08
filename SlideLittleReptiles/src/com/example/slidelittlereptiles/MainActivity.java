@@ -31,12 +31,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.slidelittlereptiles.controller.ActuListFragment;
 import com.example.slidelittlereptiles.controller.PharmListFragment;
 import com.example.slidelittlereptiles.controller.ShowMapFragment;
+import com.example.slidelittlereptiles.loader.ArrayDrawerData;
+import com.example.slidelittlereptiles.model.ObjDrawer;
+import com.example.slidelittlereptiles.view.CustomArrayAdapter;
 
 
 
@@ -49,14 +51,13 @@ public class MainActivity extends ActionBarActivity
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private String[] menuTitles;
     private String tagMap = "Map" ;
     private String tagActu = "Actu" ;
     private String tagPharma = "Pharma" ;
     private ActuListFragment actuListFragment = new ActuListFragment();
     private PharmListFragment pharmListFragment = new PharmListFragment() ;
     private ShowMapFragment showMapFragment = new ShowMapFragment();
-
+    private ArrayDrawerData dataDrawer ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +65,21 @@ public class MainActivity extends ActionBarActivity
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
        
+        
         mTitle = mDrawerTitle = getTitle();
-        menuTitles = getResources().getStringArray(R.array.reptiles_array);
+     //   menuTitles = getResources().getStringArray(R.array.actu_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item, menuTitles));
+    
+      //  mDrawerList.setAdapter(new ArrayAdapter<String>(this,R.layout.drawer_list_item, menuTitles));
+        dataDrawer = new ArrayDrawerData(this);
+   //     Log.v(tag, "test list" + dataDrawer.toString());
+        mDrawerList.setAdapter(new CustomArrayAdapter (this.getBaseContext(), dataDrawer) );
+        
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -105,7 +112,7 @@ public class MainActivity extends ActionBarActivity
 //Select default item
         if (savedInstanceState == null) 
         {
-            selectItem(0);
+            selectItem(1);
         }  
     }
 
@@ -140,6 +147,7 @@ public class MainActivity extends ActionBarActivity
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
         {
+        	
             selectItem(position);
         }
     }
@@ -151,7 +159,7 @@ public class MainActivity extends ActionBarActivity
 
         switch (position) 
         {        
-        case 0: 
+        	case 1: 
         	   
 //Display ActuListFragment and hide other fragment 
         	
@@ -167,7 +175,7 @@ public class MainActivity extends ActionBarActivity
         	ft.commit();
             break;
             
-        case 1:
+        case 2:
   
 //Display PharmaListfragment and hide other fragment
         	
@@ -185,7 +193,7 @@ public class MainActivity extends ActionBarActivity
         	ft.commit();  	
             break;
             
-        case 2:
+        case 4:
         	
 //Display ShowMapfragment and hide other fragment 
         	
@@ -208,7 +216,13 @@ public class MainActivity extends ActionBarActivity
         
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
-        setTitle(menuTitles[position]);
+       
+        
+        
+        String dataString = (((ObjDrawer)dataDrawer.get(position))).getTitle();
+        Log.v(tag,"title" + dataString);
+       
+        setTitle(dataString);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
    
@@ -217,6 +231,7 @@ public class MainActivity extends ActionBarActivity
     public void setTitle(CharSequence title) {
         mTitle = title;
         getSupportActionBar().setTitle(mTitle);
+       
     }
 
     /**
@@ -242,4 +257,6 @@ public class MainActivity extends ActionBarActivity
      * Fragment that appears in the "content_frame", shows a planet
      */
     
-    }
+    
+}
+

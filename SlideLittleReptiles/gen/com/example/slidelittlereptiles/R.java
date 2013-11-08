@@ -17,7 +17,9 @@ public final class R {
         public static final int abc_slide_out_top=0x7f040005;
     }
     public static final class array {
-        public static final int reptiles_array=0x7f0c0000;
+        public static final int actu_array=0x7f0c0000;
+        public static final int arraydrawer=0x7f0c0002;
+        public static final int categ_array=0x7f0c0001;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -937,10 +939,11 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f090002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f05000d;
+        public static final int abc_search_url_text_holo=0x7f05000f;
         public static final int abc_search_url_text_normal=0x7f05000a;
         public static final int abc_search_url_text_pressed=0x7f05000c;
         public static final int abc_search_url_text_selected=0x7f05000b;
+        public static final int blue=0x7f05000e;
         public static final int common_action_bar_splitter=0x7f050009;
         /**  Sign-in Button Colors 
          */
@@ -953,8 +956,9 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f050006;
         public static final int common_signin_btn_light_text_focused=0x7f050007;
         public static final int common_signin_btn_light_text_pressed=0x7f050005;
-        public static final int common_signin_btn_text_dark=0x7f05000e;
-        public static final int common_signin_btn_text_light=0x7f05000f;
+        public static final int common_signin_btn_text_dark=0x7f050010;
+        public static final int common_signin_btn_text_light=0x7f050011;
+        public static final int dark_blue=0x7f05000d;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1165,22 +1169,26 @@ containing a value of this type.
         public static final int custom_text_actu=0x7f020070;
         public static final int customtextpharma=0x7f020071;
         public static final int drawer_shadow=0x7f020072;
-        public static final int earth=0x7f020073;
-        public static final int ic_action_overflow=0x7f020074;
-        public static final int ic_action_refresh=0x7f020075;
-        public static final int ic_action_search=0x7f020076;
-        public static final int ic_drawer=0x7f020077;
-        public static final int ic_launcher=0x7f020078;
-        public static final int ic_plusone_medium_off_client=0x7f020079;
-        public static final int ic_plusone_small_off_client=0x7f02007a;
-        public static final int ic_plusone_standard_off_client=0x7f02007b;
-        public static final int ic_plusone_tall_off_client=0x7f02007c;
-        public static final int ic_pulltorefresh_arrow=0x7f02007d;
-        public static final int icon=0x7f02007e;
-        public static final int launcher_kitkat=0x7f02007f;
-        public static final int meteo_logo=0x7f020080;
-        public static final int pull_to_refresh_header_background=0x7f020081;
-        public static final int splash_screen=0x7f020082;
+        public static final int ic_action_overflow=0x7f020073;
+        public static final int ic_action_refresh=0x7f020074;
+        public static final int ic_action_search=0x7f020075;
+        public static final int ic_drawer=0x7f020076;
+        public static final int ic_launcher=0x7f020077;
+        public static final int ic_plusone_medium_off_client=0x7f020078;
+        public static final int ic_plusone_small_off_client=0x7f020079;
+        public static final int ic_plusone_standard_off_client=0x7f02007a;
+        public static final int ic_plusone_tall_off_client=0x7f02007b;
+        public static final int ic_pulltorefresh_arrow=0x7f02007c;
+        public static final int icon=0x7f02007d;
+        public static final int launcher_kitkat=0x7f02007e;
+        public static final int lyon1=0x7f02007f;
+        public static final int map=0x7f020080;
+        public static final int meteo=0x7f020081;
+        public static final int meteo_logo=0x7f020082;
+        public static final int pull_to_refresh_header_background=0x7f020083;
+        public static final int rectangle=0x7f020084;
+        public static final int sante=0x7f020085;
+        public static final int splash_screen=0x7f020086;
     }
     public static final class id {
         public static final int action_bar=0x7f06001f;
@@ -1194,7 +1202,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060019;
         public static final int action_menu_presenter=0x7f06001a;
         public static final int action_mode_close_button=0x7f060027;
-        public static final int action_search=0x7f060057;
+        public static final int action_search=0x7f06005c;
         public static final int activity_chooser_view_content=0x7f060028;
         public static final int acturssdetailfragment=0x7f060047;
         public static final int always=0x7f06000f;
@@ -1210,39 +1218,44 @@ containing a value of this type.
         public static final int edit_query=0x7f060033;
         public static final int end=0x7f060016;
         public static final int excerpt=0x7f060046;
-        public static final int excerptreptiles=0x7f06004b;
+        public static final int excerptreptiles=0x7f06004e;
         public static final int expand_activities_button=0x7f060029;
         public static final int expanded_menu=0x7f06002f;
+        public static final int header=0x7f060049;
         public static final int home=0x7f060017;
         public static final int homeAsUp=0x7f060009;
         public static final int hybrid=0x7f060004;
         public static final int icon=0x7f06002d;
         public static final int ifRoom=0x7f06000e;
         public static final int image=0x7f06002a;
-        public static final int imagereptiles=0x7f06004a;
+        public static final int imagereptiles=0x7f06004d;
+        public static final int item_icon=0x7f060058;
+        public static final int item_title=0x7f060059;
         public static final int left_drawer=0x7f060041;
         public static final int listMode=0x7f060005;
         public static final int listProdcellLayout=0x7f060043;
         public static final int list_item=0x7f06002c;
         public static final int listeRSS=0x7f060042;
-        public static final int map=0x7f060055;
+        public static final int listfragcateglayout=0x7f06004a;
+        public static final int map=0x7f06005a;
         public static final int middle=0x7f060015;
         public static final int never=0x7f06000d;
+        public static final int nomCateg=0x7f06004b;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int pharmarssdetailfragment=0x7f06004c;
-        public static final int progressBar=0x7f06004e;
+        public static final int pharmarssdetailfragment=0x7f06004f;
+        public static final int progressBar=0x7f060051;
         public static final int progress_circular=0x7f06001b;
         public static final int progress_horizontal=0x7f06001c;
         public static final int pubdate=0x7f060044;
-        public static final int pull_to_refresh_header=0x7f06004f;
-        public static final int pull_to_refresh_image=0x7f060051;
-        public static final int pull_to_refresh_progress=0x7f060050;
-        public static final int pull_to_refresh_text=0x7f060052;
-        public static final int pull_to_refresh_updated_at=0x7f060053;
+        public static final int pull_to_refresh_header=0x7f060052;
+        public static final int pull_to_refresh_image=0x7f060054;
+        public static final int pull_to_refresh_progress=0x7f060053;
+        public static final int pull_to_refresh_text=0x7f060055;
+        public static final int pull_to_refresh_updated_at=0x7f060056;
         public static final int radio=0x7f060032;
-        public static final int refresh=0x7f060058;
-        public static final int rss_title_view=0x7f060054;
+        public static final int refresh=0x7f06005d;
+        public static final int rss_title_view=0x7f060057;
         public static final int satellite=0x7f060002;
         public static final int search_badge=0x7f060035;
         public static final int search_bar=0x7f060034;
@@ -1258,19 +1271,19 @@ containing a value of this type.
         public static final int showCustom=0x7f06000b;
         public static final int showHome=0x7f060008;
         public static final int showTitle=0x7f06000a;
-        public static final int splash=0x7f060056;
+        public static final int splash=0x7f06005b;
         public static final int split_action_bar=0x7f060021;
         public static final int submit_area=0x7f06003c;
         public static final int tabMode=0x7f060006;
         public static final int terrain=0x7f060003;
         public static final int title=0x7f06002e;
         public static final int titre=0x7f060045;
-        public static final int titrereptiles=0x7f060049;
+        public static final int titrereptiles=0x7f06004c;
         public static final int top_action_bar=0x7f060023;
         public static final int up=0x7f060024;
         public static final int useLogo=0x7f060007;
         public static final int webviewacturss=0x7f060048;
-        public static final int webviewpharmarss=0x7f06004d;
+        public static final int webviewpharmarss=0x7f060050;
         public static final int withText=0x7f060010;
     }
     public static final class integer {
@@ -1330,16 +1343,19 @@ containing a value of this type.
         public static final int acturssdetail=0x7f03001b;
         public static final int acturssdetailfrag=0x7f03001c;
         public static final int drawer_list_item=0x7f03001d;
-        public static final int pharm_rss_cell=0x7f03001e;
-        public static final int pharm_rss_layout=0x7f03001f;
-        public static final int pharmarssdetail=0x7f030020;
-        public static final int pharmarssdetailfrag=0x7f030021;
-        public static final int progressbar=0x7f030022;
-        public static final int pull_to_refresh_header=0x7f030023;
-        public static final int rss_list_item=0x7f030024;
-        public static final int showmapview_layout=0x7f030025;
-        public static final int splash=0x7f030026;
-        public static final int support_simple_spinner_dropdown_item=0x7f030027;
+        public static final int header_item=0x7f03001e;
+        public static final int liste_fragment_categ=0x7f03001f;
+        public static final int pharm_rss_cell=0x7f030020;
+        public static final int pharm_rss_layout=0x7f030021;
+        public static final int pharmarssdetail=0x7f030022;
+        public static final int pharmarssdetailfrag=0x7f030023;
+        public static final int progressbar=0x7f030024;
+        public static final int pull_to_refresh_header=0x7f030025;
+        public static final int rss_list_item=0x7f030026;
+        public static final int select_item=0x7f030027;
+        public static final int showmapview_layout=0x7f030028;
+        public static final int splash=0x7f030029;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002a;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

@@ -50,7 +50,8 @@ public class ShowMapFragment extends Fragment
 	}
 	
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
+	public void onActivityCreated(Bundle savedInstanceState) 
+	{
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
 		FragmentManager fm = getChildFragmentManager();

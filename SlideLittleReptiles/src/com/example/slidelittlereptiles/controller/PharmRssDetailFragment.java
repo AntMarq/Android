@@ -1,18 +1,17 @@
 package com.example.slidelittlereptiles.controller;
 
-import com.example.slidelittlereptiles.GlobalVar;
-import com.example.slidelittlereptiles.R;
-import com.example.slidelittlereptiles.R.id;
-import com.example.slidelittlereptiles.R.layout;
-import com.example.slidelittlereptiles.model.ObjPharmRss;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+
+import com.example.slidelittlereptiles.GlobalVar;
+import com.example.slidelittlereptiles.R;
+import com.example.slidelittlereptiles.model.ObjPharmRss;
 
 public class PharmRssDetailFragment extends Fragment
 {
@@ -42,7 +41,7 @@ public class PharmRssDetailFragment extends Fragment
 	public boolean onOptionsItemSelected (MenuItem item)
 	{
 
-		if(item.getTitle().toString().contentEquals(getActivity().getActionBar().getTitle()))
+		if(item.getTitle().toString().contentEquals(((ActionBarActivity) getActivity()).getSupportActionBar().getTitle()))
 		{
 			//clic sur l'icone de l'appli donc retour activity précédente
 			getActivity().finish();

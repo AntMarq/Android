@@ -1,4 +1,4 @@
-package com.example.slidelittlereptiles;
+package com.example.slidelittlereptiles.loader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,15 +16,15 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import com.example.slidelittlereptiles.model.ObjActuRss;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.slidelittlereptiles.GlobalVar;
+import com.example.slidelittlereptiles.model.ObjActuRss;
 
 public class ActuLoadRss extends ArrayList<ObjActuRss>
 {
@@ -34,12 +34,11 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 	private static final long serialVersionUID = 1L;
 	private static final String ns = null;
 	private Handler				handler;
-	Context context;
-	ObjActuRss objRss;
-	GetRss loading ;
-	//RssFeedObject newObj;
-	public String tag = "ActuLoadRSS";
-	GlobalVar application;
+	private Context context;
+	private ObjActuRss objRss;
+	private GetRss loading ;
+	private String tag = "ActuLoadRSS";
+	private GlobalVar application;
 
 	
 	
@@ -77,7 +76,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 		}
 		else
 		{
-			Toast.makeText (application.getBaseContext(), "Pas de réseau Internet", 3).show ();
+			Toast.makeText (application.getBaseContext(), "RŽseau non disponible", 3).show ();
 		}
 		
 	}
@@ -173,9 +172,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 				                    {				  			                    						                    		
 				                    		
 			                    		newObject.title = xpp.nextText(); 
-			                    					         
-			                  //  	Log.v(tag , "resultat title" + newObject.title );
-					                       // xpp.nextTag();
+			                    					         		          
         
 				                    }
 				                    else if (name.equals("description"))
@@ -185,7 +182,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 				                    }
 				                    else if (name.equals("pubDate"))
 				                    {		
-				                    	newObject.pubDate=xpp.nextText();
+				                    	newObject.pubDate = newObject.ActudateString(xpp.nextText());
 				                		
 			
 				                    }
@@ -232,7 +229,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 			}
 			else
 			{
-				Log.e (tag, "Une erreur est survenue pendant la récupération du flux RSS");
+				Log.e (tag, "Une erreur est survenue pendant la rŽcupŽration du flux RSS");
 				msg.arg1 = 0;
 			}	
 
