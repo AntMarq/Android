@@ -87,7 +87,7 @@ public class PharmRssAdapter extends BaseAdapter
 			
 			 // Do it on Application start	
 			
-			holder.imagePharma.setImageBitmap(listRSS.get(position).getImageRept());
+			//holder.imagePharma.setImageBitmap(listRSS.get(position).getImageRept());
 			
 			
 			final ViewHolder finalHolder = holder;

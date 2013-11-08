@@ -42,7 +42,7 @@ public class ObjActuRss implements Comparable<Object>{
 		/* Parsing String -> Date */ 
 		try 
 		{ 
-		  Date dateActu = (new SimpleDateFormat( pattern, Locale.US  )).parse( pubDate ) ;
+		  Date dateActu = (new SimpleDateFormat( pattern, Locale.US  )).parse( string ) ;
 	//	  Log.v("ObjeActuRss", "dateformat" + dateActu );
 		  return dateActu;
 		} 
@@ -53,10 +53,10 @@ public class ObjActuRss implements Comparable<Object>{
 		}		
 	}
 	
-	public String ActudateString ()
+	public String ActudateString (String originalDate)
 	{
 		String newPattern = "EEE d/MM/yyyy HH:mm:ss" ;
-		String newDateString = (new SimpleDateFormat( newPattern)).format( ActuDate (toString ()) ) ; 
+		String newDateString = new SimpleDateFormat( newPattern).format( ActuDate (originalDate) ) ; 
 		return newDateString;
 	}
 	

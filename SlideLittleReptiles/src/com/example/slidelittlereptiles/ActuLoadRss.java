@@ -185,8 +185,7 @@ public class ActuLoadRss extends ArrayList<ObjActuRss>
 				                    }
 				                    else if (name.equals("pubDate"))
 				                    {		
-				                    	newObject.pubDate=xpp.nextText();
-				                		
+				                    	newObject.pubDate = newObject.ActudateString(xpp.nextText());
 			
 				                    }
 

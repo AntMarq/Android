@@ -157,7 +157,9 @@ public class MainActivity extends ActionBarActivity
         	
         	if(manager.findFragmentByTag(tagActu) == null )
         	{
-                ft.add(R.id.content_frame,actuListFragment,tagActu);        
+                ft.add(R.id.content_frame,actuListFragment,tagActu);
+                pharmListFragment.setHasOptionsMenu(false);
+	        	showMapFragment.setHasOptionsMenu(false);
         	}	
         	else
         	{       	

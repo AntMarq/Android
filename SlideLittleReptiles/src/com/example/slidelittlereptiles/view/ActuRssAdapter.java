@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class ActuRssAdapter extends BaseAdapter
 	@Override
 	public View getView (int position, View convertView, ViewGroup parent)
 	{
+		Log.v(tag, "getView");
 		ViewHolder holder = null;
 		
 		
@@ -78,24 +80,21 @@ public class ActuRssAdapter extends BaseAdapter
 		}						
 		else 
 		{
-			 
-		
 			holder = (ViewHolder)convertView.getTag();				
 		
 		}
 		
 		 // Do it on Application start	
 		
-		holder.image.setImageBitmap(listRSS.get(position).getImage());
+		//holder.image.setImageBitmap(listRSS.get(position).getImage());
 		
 		
 		final ViewHolder finalHolder = holder;
-		Bitmap cachedImage = null;
 
 		final ObjActuRss objActu = ((ObjActuRss)(listRSS.get(position)));
 		   holder.rssTitleView.setText  (Html.fromHtml((objActu.getTitle ().toString())));
 		   holder.description.setText (Html.fromHtml((objActu.getDescription().toString())));
-		   holder.pubDate.setText(listRSS.get(position).ActudateString());
+		   holder.pubDate.setText(objActu.pubDate);
 		
 		if ((objActu.getUrlimage () != null)  && objActu.getImage ()==null)
 		{
