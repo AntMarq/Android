@@ -250,11 +250,5 @@ public class MainActivity extends ActionBarActivity
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-    /**
-     * Fragment that appears in the "content_frame", shows a planet
-     */
-    
-    
 }
 
