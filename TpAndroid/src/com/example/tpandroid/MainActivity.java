@@ -16,6 +16,8 @@
 
 package com.example.tpandroid;
 
+
+import com.example.tpandroid.R;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;

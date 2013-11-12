@@ -1,5 +1,6 @@
 package com.example.tpandroid.controller;
 
+import com.example.tpandroid.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,7 +8,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
 
 import com.example.tpandroid.GlobalApplication;
-import com.example.tpandroid.R;
 import com.example.tpandroid.model.ObjPharmRss;
 
 public class PharmRssDetail extends ActionBarActivity 

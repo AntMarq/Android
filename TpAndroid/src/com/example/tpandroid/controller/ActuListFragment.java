@@ -1,5 +1,6 @@
 package com.example.tpandroid.controller;
 
+import com.example.tpandroid.R;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -17,11 +18,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.tpandroid.GlobalApplication;
-import com.example.tpandroid.R;
 import com.example.tpandroid.loader.ActuLoadRss;
 import com.example.tpandroid.model.ObjActuRss;
 import com.example.tpandroid.view.ActuRssAdapter;
-import com.markupartist.android.widget.PullToRefreshListView;
 import com.markupartist.android.widget.PullToRefreshListView.OnRefreshListener;
 
 
