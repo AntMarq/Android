@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tpandroid"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+     android:minSdkVersion="10"
+        android:targetSdkVersion="18" />
+    
+    <permission android:name="com.example.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.example.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.mapexplore.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+	
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_lyon"
+        android:label="@string/app_name"
+       android:theme="@style/Theme.AppCompat.Light.DarkActionBar" android:name="GlobalApplication">
+        
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+           
+            android:value="AIzaSyAnP42fQSQ6U5UDgI_xynOKZB4RKLK38bg" />
+        
+        <!--  AIzaSyCsuxje3EHK0bgOZVwE9Zb-90dkZPXikC8  //// release AIzaSyAEhLC0O673UkBTD-R7kW_zrJda1zG3Owg //portable AIzaSyDQMfhUh_1R4qwzqd8KlHpO4NOEp_30Ky8 -->
+      
+        
+        
+        <activity 
+            android:name="com.example.tpandroid.SplashActivity"  android:theme="@android:style/Theme.Black.NoTitleBar">            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"/> 
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.tpandroid.MainActivity" android:configChanges="orientation|screenSize" >
+           
+        </activity>
+        <activity android:name="com.example.tpandroid.controller.ActuRssDetail"    >   
+            
+      </activity>  
+      <activity android:name="com.example.tpandroid.controller.PharmRssDetail" >
+      </activity>
+            
+    <meta-data
+    android:name="com.google.android.gms.version"
+    android:value="@integer/google_play_services_version" />
+        
+    </application>
+
+</manifest>
