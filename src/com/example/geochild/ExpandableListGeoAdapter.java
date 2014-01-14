@@ -26,7 +26,7 @@ public class ExpandableListGeoAdapter extends BaseExpandableListAdapter {
     {
         this._context = context;
         this._listDataHeader = listDataHeader;
-    //    this.listDataCateg = listDataCateg;
+ 
         this._listDataChild = listChildData;
     }
  
