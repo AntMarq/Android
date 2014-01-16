@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -18,9 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity 
 {
@@ -37,7 +36,7 @@ public class MainActivity extends FragmentActivity
     private Fragment fragment;
     private String tagMap = "Map";
     private ExpandableListGeoAdapter mExpandableListGeoAdapter;
-	
+    final static String ARG_POSITION = "position";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -60,6 +59,7 @@ public class MainActivity extends FragmentActivity
 		mExpandableListGeoAdapter = new ExpandableListGeoAdapter(this.getBaseContext(), listDataHeader, listDataChild); 
 		mDrawerList.setAdapter(mExpandableListGeoAdapter);
 		mDrawerList.setOnGroupClickListener(new DrawerItemClickListener());
+		mDrawerList.setOnChildClickListener(new DrawerItemClickListener());
 
 		// enable ActionBar app icon to behave as action to toggle nav drawer
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,7 +92,14 @@ public class MainActivity extends FragmentActivity
 
 		if (savedInstanceState == null)
 		{
-			selectItem(0);
+			 mDrawerLayout.postDelayed(new Runnable() 
+			    {
+			        @Override
+			        public void run() 
+			        {
+			        	mDrawerLayout.openDrawer(Gravity.LEFT);
+			        }
+			    }, 1000);
 		}
 	}
 	
@@ -101,14 +108,7 @@ public class MainActivity extends FragmentActivity
 	{
 	    super.onResume(); 
 	    Log.v(tag, "onResume");
-	    mDrawerLayout.postDelayed(new Runnable() 
-	    {
-	        @Override
-	        public void run() 
-	        {
-	        	mDrawerLayout.openDrawer(Gravity.LEFT);
-	        }
-	    }, 1000);
+	    
 	}
 	
 		@Override
@@ -161,34 +161,33 @@ public class MainActivity extends FragmentActivity
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,int groupPosition, int childPosition, long id) 
 			{
-				selectItem(groupPosition);
+				Log.v(tag, "childPosition = " + childPosition);
+				
+						FragmentManager manager = getSupportFragmentManager();
+						FragmentTransaction ft = manager.beginTransaction();
+						
+						Bundle args = new Bundle();												
+						fragment = new MapFragment();
+						args.putInt("position", childPosition);
+						fragment.setArguments(args);						
+						ft.replace(R.id.content_frame, fragment, tagMap).commit();
+						
+						mDrawerList.setItemChecked(childPosition, true);
+					//	String dataString = (((ObjDrawer) dataDrawer.get(position))).getTitle();
+					//	setTitle(dataString);
+						mDrawerLayout.closeDrawer(mDrawerList);
+				
 				return false;
 			}
 		}
 		
 		
 		private void selectItem(int position)
-		{
-			FragmentManager manager = getSupportFragmentManager();
-			FragmentTransaction ft = manager.beginTransaction();
-
-			switch (position)
-			{
-				case 0:
-					Log.v(tag, "position0");
-					fragment = new MapFragment();
-					ft.replace(R.id.content_frame, fragment, tagMap).commit();
-					break;	
-				case 1:
-					Log.v(tag, "position1");
-					fragment = new MapFragment();
-					ft.replace(R.id.content_frame, fragment, tagMap).commit();
-					break;	
-			}		
-			mDrawerList.setItemChecked(position, true);
+		{			
+		//	mDrawerList.setItemChecked(position, true);
 			//String dataString = listDataHeader.get(position).toString();
 		//	setTitle(dataString);
-			mDrawerLayout.closeDrawer(mDrawerList);
+		//	mDrawerLayout.closeDrawer(mDrawerList);
 		}
 		
 		private void prepareListData() {
@@ -214,10 +213,12 @@ public class MainActivity extends FragmentActivity
 	        loadCartes.add("France");
 	        loadCartes.add("Italie");   
 	        loadCartes.add("Portugal");
+	        loadCartes.add("Russie");
 	        loadCartes.add("Suisse");
 	 
 	 
 	        listDataChild.put(listDataHeader.get(0), loadCartes); // Header, Child data
 
 	    }
+		
 }
