@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -37,6 +36,7 @@ public class MainActivity extends FragmentActivity
     private String tagMap = "Map";
     private ExpandableListGeoAdapter mExpandableListGeoAdapter;
     final static String ARG_POSITION = "position";
+    List<String> loadCartes;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -173,8 +173,9 @@ public class MainActivity extends FragmentActivity
 						ft.replace(R.id.content_frame, fragment, tagMap).commit();
 						
 						mDrawerList.setItemChecked(childPosition, true);
-					//	String dataString = (((ObjDrawer) dataDrawer.get(position))).getTitle();
-					//	setTitle(dataString);
+						String dataString = loadCartes.get(childPosition).toString();
+						setTitle(dataString);
+						Log.v(tag, "title =" + dataString );
 						mDrawerLayout.closeDrawer(mDrawerList);
 				
 				return false;
@@ -184,6 +185,9 @@ public class MainActivity extends FragmentActivity
 		
 		private void selectItem(int position)
 		{			
+			
+			Log.v(tag, "selectItem" + position);
+			
 		//	mDrawerList.setItemChecked(position, true);
 			//String dataString = listDataHeader.get(position).toString();
 		//	setTitle(dataString);
@@ -206,7 +210,7 @@ public class MainActivity extends FragmentActivity
 	        listDataHeader.add("Supprimer");
 	 
 	        // Adding child data
-	        List<String> loadCartes = new ArrayList<String>();
+	        loadCartes = new ArrayList<String>();
 	        loadCartes.add("Allemagne");
 	        loadCartes.add("Angleterre");
 	        loadCartes.add("Espagne");

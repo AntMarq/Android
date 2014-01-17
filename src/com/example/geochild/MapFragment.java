@@ -5,11 +5,14 @@ package com.example.geochild;
 
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,12 +32,15 @@ public class MapFragment extends Fragment implements  OnTouchListener
 	int myChildPosition ;
 	private Bitmap mBitmap,mutableBitmap,workingBitmap;
 	private ImageViewTouch imageViewTouch ;
-//	private TouchImageView imageViewTouch ;
+	
 	private Bitmap bitmap;
 	private float scaleX,scaleY ;
 	private Canvas canvas;
 	private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	private float hauteurBarAction;
+	private int [] coordinateL = new int [2];
+	int heightTouch;
+	int widthTouch ;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,Bundle savedInstanceState) 
@@ -44,8 +50,7 @@ public class MapFragment extends Fragment implements  OnTouchListener
 	    application = (GlobalMethods) getActivity().getApplicationContext();
 	    imageViewTouch = (ImageViewTouch) view.findViewById(R.id.image);
 	    imageViewTouch.setOnTouchListener(this);
-	//    imageViewTouch.setMaxZoom(10.0f);
-	//    imageViewTouch.setMinZoom(1.0f);
+	    
 	    Bundle bundle=getArguments(); 
 		myChildPosition =bundle.getInt("position");  
 		
@@ -61,6 +66,8 @@ public class MapFragment extends Fragment implements  OnTouchListener
 	    	 workingBitmap =  Bitmap.createBitmap(bitmap);
 			 mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
 	    	 imageViewTouch.setImageBitmap(mutableBitmap);
+	    	 
+	    	
 	    	
 	    }
 	    else if(myChildPosition == 1)
@@ -115,7 +122,7 @@ public class MapFragment extends Fragment implements  OnTouchListener
 	    imageViewTouch.setOnLongClickListener(new OnLongClickListener() {
 
 	        @Override
-	        public boolean onLongClick(View v) 
+	        public boolean onLongClick(final View v) 
 	        {
 	        	getActivity().runOnUiThread (new Runnable ()
 				{
@@ -123,43 +130,48 @@ public class MapFragment extends Fragment implements  OnTouchListener
 					@Override
 					public void run ()
 					{
-
-						hauteurBarAction = getActivity().getActionBar ().getHeight ();
-						 Log.v("MapFragment", "hauteurBarAction" + hauteurBarAction );
 						
-						 	float x = application.dimScreen()[1];
-		                    Log.v("MapFragment", "x = " + x);
-		                    float y = application.dimScreen()[0];
-		                    Log.v("MapFragment", "y = " + y);
-		                 //   Drawable d = getResources().getDrawable(R.drawable.mini_map_marker);
-		                  //  scaleX = d.getIntrinsicWidth()/canvas.getWidth();
-		                  //  scaleY = d.getIntrinsicHeight()/canvas.getHeight();
+						 canvas = new Canvas(mutableBitmap);
+						
+					//	hauteurBarAction = getActivity().getActionBar ().getHeight ();
+					//	 Log.v("MapFragment", "hauteurBarAction" + hauteurBarAction );
+						 
+		                    coordinateL[0] = widthTouch;
+		                    coordinateL[1] = heightTouch;
+		                 /*   Drawable d = new BitmapDrawable(getResources(),mutableBitmap);
+		                   
+		                    scaleX = d.getIntrinsicWidth()/canvas.getWidth();    
+		                    scaleY = d.getIntrinsicHeight()/canvas.getHeight(); */
+		                    
 		                    paint.setARGB(255,0,255,20);
 		                    paint.setStyle(Style.FILL);
-		            	   
-		                    canvas = new Canvas(mutableBitmap);
-		                    Bitmap newIconmap = BitmapFactory.decodeResource(getResources(),R.drawable.map_marker);
-		        	        canvas.drawBitmap(newIconmap,500, 250, paint);
-		        	        imageViewTouch.invalidate();
-		        	      
-		        	       
+		                    
+		                   Log.v(tag, "taille de la vue H " + v.getHeight() + " taille de la vue W " + v.getWidth()) ;
+
+		                    int calculmapH = mutableBitmap.getHeight();		                   
+		                    Log.v(tag, "calculmapH" + calculmapH);
+		                  
+		                    int calculmapW = mutableBitmap.getWidth();
+		                    Log.v(tag, "calculmapW" + calculmapW);
+		                    
+		                    float screenDimH = (application.dimScreen()[0] ) ;
+		                    Log.v(tag, "screenDimH" + screenDimH);
+		                    float screenDimW = application.dimScreen()[1];
+		                    Log.v(tag, "screenDimW" + screenDimW);
+		                    
+		                    float ratioH = calculmapH/screenDimH ;
+		                    Log.v(tag, "ratioH" + ratioH);
+		                    float ratioW = calculmapW/screenDimW ;
+		                   
+		                    Log.v(tag, "SCALE  " + imageViewTouch.getScale()) ; 
+		                    
+		                    canvas.drawCircle(((widthTouch)*ratioW), ((heightTouch)*ratioH), 10, paint);
+		        	        imageViewTouch.invalidate(); 
 					}
 				});
-	        	 return true;
-	          
+	        	 return true;	          
 	        }
 	    });
-	  /*  imageViewTouch.setSingleTapListener(new OnImageViewTouchSingleTapListener()
-	    {
-            
-            @Override
-            public void onSingleTapConfirmed() 
-            {
-                    Log.v("MapFragment", "onSingleTapConfirmed" );
-                    
-                   
-            }
-	    });*/
 	  
 	    return view ;
 	
@@ -168,15 +180,27 @@ public class MapFragment extends Fragment implements  OnTouchListener
 	
 
 	@Override
-	public boolean onTouch(View arg0,  MotionEvent event) 
+	public boolean onTouch(View v,  MotionEvent event) 
 	{
-		int heightTouch = (int) event.getX();
-		int widthTouch = (int) event.getY();
-		Log.v(tag, "heightTouch" + heightTouch);
-		Log.v(tag, "widthTouch" + widthTouch);
+		widthTouch = (int) event.getX();
+		heightTouch = (int) event.getY();
+		
 		return false;
 	}
 	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
 
+	    // Checks the orientation of the screen
+	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) 
+	    {
+	    	
+	    } 
+	    else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+	    {
+	      
+	    }
+	}
 	
 }
